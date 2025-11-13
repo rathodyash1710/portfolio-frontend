@@ -10,23 +10,16 @@ const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
 
-import React, { useState, useEffect } from 'react';
-import { Loader2, Mail, Phone, Linkedin, Github, ExternalLink, Calendar, Briefcase, Code, Brain, Award, AlertCircle, X } from 'lucide-react';
+  // Backend API URL
+// Backend API URL - use environment variable in production, localhost in development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = `${API_BASE_URL}/api/portfolio/`;
 
-const Portfolio = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
-
-  // Backend API URL - use environment variable in production, localhost in development
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-  const API_URL = `${API_BASE_URL}/api/portfolio/`;
 
   // Open project modal
   const openProjectModal = (project) => {
     setSelectedProject(project);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
   };
 
   // Close project modal
@@ -45,7 +38,7 @@ const Portfolio = () => {
         return res.json();
       })
       .then(data => {
-        console.log('Fetched data:', data);
+        console.log('Fetched data:', data); // For debugging
         setData(data);
         setLoading(false);
       })
