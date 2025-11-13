@@ -11,7 +11,7 @@ const Portfolio = () => {
 
 
   // Backend API URL
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/portfolio/';
+const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-d55k.onrender.com/api/portfolio/';
 
 
 
