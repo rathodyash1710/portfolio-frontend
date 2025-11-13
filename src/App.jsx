@@ -10,15 +10,23 @@ const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
 
-  // Backend API URL
-const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-d55k.onrender.com/api/portfolio/';
+import React, { useState, useEffect } from 'react';
+import { Loader2, Mail, Phone, Linkedin, Github, ExternalLink, Calendar, Briefcase, Code, Brain, Award, AlertCircle, X } from 'lucide-react';
 
+const Portfolio = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
 
+  // Backend API URL - use environment variable in production, localhost in development
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  const API_URL = `${API_BASE_URL}/api/portfolio/`;
 
   // Open project modal
   const openProjectModal = (project) => {
     setSelectedProject(project);
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    document.body.style.overflow = 'hidden';
   };
 
   // Close project modal
@@ -37,7 +45,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-d55k.onrender
         return res.json();
       })
       .then(data => {
-        console.log('Fetched data:', data); // For debugging
+        console.log('Fetched data:', data);
         setData(data);
         setLoading(false);
       })
@@ -46,7 +54,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-d55k.onrender
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [API_URL]);
 
   if (loading) {
     return (
